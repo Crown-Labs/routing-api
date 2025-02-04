@@ -1,3 +1,4 @@
+import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@kittycorn-labs/smart-order-router'
 import {
   constructSameBatchParamsMap,
   constructSameBlockNumberConfigsMap,
@@ -9,11 +10,10 @@ import {
   DEFAULT_GAS_ERROR_FAILURE_OVERRIDES,
   DEFAULT_RETRY_OPTIONS,
   DEFAULT_SUCCESS_RATE_FAILURE_OVERRIDES,
-} from '@uniswap/smart-order-router/build/main/util/onchainQuoteProviderConfigs'
+} from '@kittycorn-labs/smart-order-router/build/main/util/onchainQuoteProviderConfigs'
+import { Protocol } from '@uniswap/router-sdk'
 import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@uniswap/sdk-core'
 import AsyncRetry from 'async-retry'
-import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@uniswap/smart-order-router'
-import { Protocol } from '@uniswap/router-sdk'
 
 export const RETRY_OPTIONS: { [chainId: number]: AsyncRetry.Options | undefined } = {
   ...constructSameRetryOptionsMap(DEFAULT_RETRY_OPTIONS),

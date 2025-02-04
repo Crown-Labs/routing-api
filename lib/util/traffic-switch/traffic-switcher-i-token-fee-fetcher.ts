@@ -1,8 +1,11 @@
-import { TrafficSwitcher } from './traffic-switcher'
-import { ITokenFeeFetcher, TokenFeeMap } from '@uniswap/smart-order-router/build/main/providers/token-fee-fetcher'
-import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
-import { log } from '@uniswap/smart-order-router'
+import { log } from '@kittycorn-labs/smart-order-router'
+import { ProviderConfig } from '@kittycorn-labs/smart-order-router/build/main/providers/provider'
+import {
+  ITokenFeeFetcher,
+  TokenFeeMap,
+} from '@kittycorn-labs/smart-order-router/build/main/providers/token-fee-fetcher'
 import { BigNumber } from 'ethers'
+import { TrafficSwitcher } from './traffic-switcher'
 
 type Address = string
 

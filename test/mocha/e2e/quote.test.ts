@@ -1,6 +1,3 @@
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
-import { AllowanceTransfer, PERMIT2_ADDRESS, PermitSingle } from '@uniswap/permit2-sdk'
-import { ChainId, Currency, CurrencyAmount, Ether, Fraction, Rounding, Token, WETH9 } from '@uniswap/sdk-core'
 import {
   CEUR_CELO,
   CEUR_CELO_ALFAJORES,
@@ -27,7 +24,11 @@ import {
   V4_SUPPORTED,
   WBTC_MAINNET,
   WLD_WORLDCHAIN,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
+import { WRAPPED_NATIVE_CURRENCY } from '@kittycorn-labs/smart-order-router/build/main/index'
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
+import { AllowanceTransfer, PERMIT2_ADDRESS, PermitSingle } from '@uniswap/permit2-sdk'
+import { ChainId, Currency, CurrencyAmount, Ether, Fraction, Rounding, Token, WETH9 } from '@uniswap/sdk-core'
 import {
   UNIVERSAL_ROUTER_ADDRESS as UNIVERSAL_ROUTER_ADDRESS_BY_CHAIN,
   UniversalRouterVersion,
@@ -46,11 +47,10 @@ import { SUPPORTED_CHAINS } from '../../../lib/handlers/injector-sor'
 import { QuoteQueryParams, TradeTypeParam } from '../../../lib/handlers/quote/schema/quote-schema'
 import { QuoteResponse } from '../../../lib/handlers/schema'
 import { Permit2__factory } from '../../../lib/types/ext'
+import { FLAT_PORTION, GREENLIST_TOKEN_PAIRS, Portion } from '../../test-utils/mocked-data'
 import { resetAndFundAtBlock } from '../../utils/forkAndFund'
 import { getBalance, getBalanceAndApprove } from '../../utils/getBalanceAndApprove'
 import { DAI_ON, getAmount, getAmountFromToken, UNI_MAINNET, USDC_ON, USDT_ON, WNATIVE_ON } from '../../utils/tokens'
-import { FLAT_PORTION, GREENLIST_TOKEN_PAIRS, Portion } from '../../test-utils/mocked-data'
-import { WRAPPED_NATIVE_CURRENCY } from '@uniswap/smart-order-router/build/main/index'
 
 const { ethers } = hre
 

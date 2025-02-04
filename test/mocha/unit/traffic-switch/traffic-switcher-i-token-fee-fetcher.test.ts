@@ -1,13 +1,16 @@
-import sinon, { SinonSpy } from 'sinon'
-import { metric } from '@uniswap/smart-order-router/build/main/util/metric'
-import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
-import { TrafficSwitcherITokenFeeFetcher } from '../../../../lib/util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
-import { GraphQLTokenFeeFetcher } from '../../../../lib/graphql/graphql-token-fee-fetcher'
-import { OnChainTokenFeeFetcher, TokenFeeMap } from '@uniswap/smart-order-router/build/main/providers/token-fee-fetcher'
-import { BigNumber } from 'ethers'
+import { MetricLoggerUnit } from '@kittycorn-labs/smart-order-router'
+import { ProviderConfig } from '@kittycorn-labs/smart-order-router/build/main/providers/provider'
+import {
+  OnChainTokenFeeFetcher,
+  TokenFeeMap,
+} from '@kittycorn-labs/smart-order-router/build/main/providers/token-fee-fetcher'
+import { metric } from '@kittycorn-labs/smart-order-router/build/main/util/metric'
 import { expect } from 'chai'
-import { MetricLoggerUnit } from '@uniswap/smart-order-router'
+import { BigNumber } from 'ethers'
+import sinon, { SinonSpy } from 'sinon'
+import { GraphQLTokenFeeFetcher } from '../../../../lib/graphql/graphql-token-fee-fetcher'
 import { TrafficSwitcher } from '../../../../lib/util/traffic-switch/traffic-switcher'
+import { TrafficSwitcherITokenFeeFetcher } from '../../../../lib/util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
 
 describe('TrafficSwitcherITokenFeeFetcher', () => {
   let spy: SinonSpy

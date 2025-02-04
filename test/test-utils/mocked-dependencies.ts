@@ -4,8 +4,13 @@ import {
   USDC_MAINNET,
   V3PoolProvider,
   WRAPPED_NATIVE_CURRENCY,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
+import { AmountQuote } from '@kittycorn-labs/smart-order-router/build/main/providers/on-chain-quote-provider'
+import { V3Route } from '@kittycorn-labs/smart-order-router/build/main/routers'
+import { ChainId, CurrencyAmount } from '@uniswap/sdk-core'
 import { Pool } from '@uniswap/v3-sdk'
+import { BigNumber } from 'ethers'
+import sinon from 'sinon'
 import {
   buildMockV3PoolAccessor,
   DAI_USDT_LOW,
@@ -14,11 +19,6 @@ import {
   USDC_WETH_LOW,
   WETH9_USDT_LOW,
 } from './mocked-data'
-import sinon from 'sinon'
-import { V3Route } from '@uniswap/smart-order-router/build/main/routers'
-import { ChainId, CurrencyAmount } from '@uniswap/sdk-core'
-import { AmountQuote } from '@uniswap/smart-order-router/build/main/providers/on-chain-quote-provider'
-import { BigNumber } from 'ethers'
 
 export function getMockedV3PoolProvider(
   pools: Pool[] = [USDC_DAI_LOW, USDC_DAI_MEDIUM, USDC_WETH_LOW, WETH9_USDT_LOW, DAI_USDT_LOW]
