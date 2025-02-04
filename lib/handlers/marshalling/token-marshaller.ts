@@ -1,6 +1,6 @@
 import { Currency, Token } from '@uniswap/sdk-core'
 import { BigNumber } from 'ethers'
-import { getAddress, nativeOnChain } from '@uniswap/smart-order-router'
+import { getAddress, nativeOnChain } from '@kittycorn-labs/smart-order-router'
 import { isNativeCurrency } from '@uniswap/universal-router-sdk'
 
 export interface MarshalledCurrency {

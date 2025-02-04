@@ -13,7 +13,7 @@ import {
   sortsBefore,
   SwapOptions,
   SwapRoute,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
 import { Pool as V3Pool } from '@uniswap/v3-sdk'
 import { Pool as V4Pool } from '@uniswap/v4-sdk'
 import JSBI from 'jsbi'

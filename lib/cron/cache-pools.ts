@@ -7,7 +7,7 @@ import {
   V3SubgraphPool,
   V3SubgraphProvider,
   V4SubgraphPool,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
 import { EventBridgeEvent, ScheduledHandler } from 'aws-lambda'
 import { S3 } from 'aws-sdk'
 import { ChainId } from '@uniswap/sdk-core'

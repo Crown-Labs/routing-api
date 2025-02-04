@@ -10,7 +10,7 @@ import {
   MetricLoggerUnit,
   routeToString,
   SupportedRoutes,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
 import { AWSError, DynamoDB, Lambda } from 'aws-sdk'
 import { ChainId, Currency, CurrencyAmount, Fraction, Token, TradeType } from '@uniswap/sdk-core'
 import { Protocol } from '@uniswap/router-sdk'

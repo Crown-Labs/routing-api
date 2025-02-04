@@ -1,5 +1,5 @@
 import { Protocol } from '@uniswap/router-sdk'
-import { V2SubgraphProvider, V3SubgraphProvider, V4SubgraphProvider } from '@uniswap/smart-order-router'
+import { V2SubgraphProvider, V3SubgraphProvider, V4SubgraphProvider } from '@kittycorn-labs/smart-order-router'
 import { ChainId } from '@uniswap/sdk-core'
 
 // during local cdk stack update, the env vars are not populated
