@@ -34,6 +34,10 @@ export function chainIdToNetworkName(networkId: ChainId): string {
 }
 
 export function generateProviderUrl(key: string, value: string, chainId: number): string {
+  if (key === 'WEB3_RPC_1') {
+    return value
+  }
+
   if (key === 'UNIRPC_0') {
     // UNIRPC_0 is a special case for the Uniswap RPC
     // - env value will contain the generic unirpc endpoint - no trailing '/'

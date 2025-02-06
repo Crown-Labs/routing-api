@@ -95,25 +95,25 @@ import { DynamoRouteCachingProvider } from './router-entities/route-caching/dyna
 
 export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.MAINNET,
-  ChainId.OPTIMISM,
-  ChainId.ARBITRUM_ONE,
-  ChainId.POLYGON,
-  ChainId.SEPOLIA,
-  ChainId.CELO,
-  ChainId.CELO_ALFAJORES,
-  ChainId.BNB,
-  ChainId.AVALANCHE,
-  ChainId.BASE,
-  ChainId.BLAST,
-  ChainId.ZORA,
-  ChainId.ZKSYNC,
-  ChainId.WORLDCHAIN,
-  ChainId.UNICHAIN_SEPOLIA,
-  ChainId.MONAD_TESTNET,
-  ChainId.BASE_SEPOLIA,
-  ChainId.UNICHAIN,
+  // ChainId.OPTIMISM,
+  // ChainId.ARBITRUM_ONE,
+  // ChainId.POLYGON,
+  // ChainId.SEPOLIA,
+  // ChainId.CELO,
+  // ChainId.CELO_ALFAJORES,
+  // ChainId.BNB,
+  // ChainId.AVALANCHE,
+  // ChainId.BASE,
+  // ChainId.BLAST,
+  // ChainId.ZORA,
+  // ChainId.ZKSYNC,
+  // ChainId.WORLDCHAIN,
+  // ChainId.UNICHAIN_SEPOLIA,
+  // ChainId.MONAD_TESTNET,
+  // ChainId.BASE_SEPOLIA,
+  // ChainId.UNICHAIN,
 ]
-const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
+const DEFAULT_TOKEN_LIST = 'https://tokens.coingecko.com/uniswap/all.json'
 
 export interface RequestInjected<Router> extends BaseRInj {
   chainId: ChainId
