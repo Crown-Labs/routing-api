@@ -399,6 +399,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
                     ? QUOTER_V2_ADDRESSES[chainId]
                     : PROTOCOL_V4_QUOTER_ADDRESSES[chainId]
               )
+
               const targetQuoteProvider = new OnChainQuoteProvider(
                 chainId,
                 provider,
@@ -431,6 +432,9 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
                     ? `ChainId_${chainId}_ShadowMixedQuoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
                     : `ChainId_${chainId}_ShadowV3Quoter_OptimisticCachedRoutes${optimisticCachedRoutes}_`
               )
+
+              log.info({ currentQuoteProvider, targetQuoteProvider }, 'currentQuoteProvider, targetQuoteProvider')
+
               quoteProvider = new TrafficSwitchOnChainQuoteProvider({
                 currentQuoteProvider: currentQuoteProvider,
                 targetQuoteProvider: targetQuoteProvider,

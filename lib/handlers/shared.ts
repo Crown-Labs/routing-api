@@ -1,4 +1,3 @@
-import { ChainId, Currency, CurrencyAmount, Percent } from '@uniswap/sdk-core'
 import {
   AlphaRouterConfig,
   CacheMode,
@@ -7,8 +6,9 @@ import {
   MapWithLowerCaseKey,
   ProtocolPoolSelection,
 } from '@kittycorn-labs/smart-order-router'
-import { FeeOptions } from '@uniswap/v3-sdk'
+import { ChainId, Currency, CurrencyAmount, Percent } from '@uniswap/sdk-core'
 import { FlatFeeOptions } from '@uniswap/universal-router-sdk'
+import { FeeOptions } from '@uniswap/v3-sdk'
 
 export const SECONDS_PER_BLOCK_BY_CHAIN_ID: { [chainId in ChainId]?: number } = {
   [ChainId.MAINNET]: 30,
@@ -228,7 +228,7 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
           topNWithEachBaseToken: 3,
           topNWithBaseToken: 5,
         },
-        maxSwapsPerPath: 3,
+        maxSwapsPerPath: 6,
         minSplits: 1,
         maxSplits: 7,
         distributionPercent: 5,
@@ -265,7 +265,7 @@ export const QUOTE_SPEED_CONFIG: { [key: string]: QuoteSpeedConfig } = {
       topNWithEachBaseToken: 1,
       topNWithBaseToken: 1,
     },
-    maxSwapsPerPath: 2,
+    maxSwapsPerPath: 6,
     maxSplits: 1,
     distributionPercent: 100,
     writeToCachedRoutes: false,
@@ -283,7 +283,7 @@ export const INTENT_SPECIFIC_CONFIG: { [key: string]: IntentSpecificConfig } = {
   caching: {
     // When the intent is to create a cache entry, we will use cachedRoutes with Tapcompare to track accuracy
     intent: INTENT.CACHING,
-    useCachedRoutes: true,
+    useCachedRoutes: false,
     // overwriteCacheMode: CacheMode.Tapcompare,
     // This optimistic=false is *super* important to avoid an infinite loop of caching quotes calling themselves
     optimisticCachedRoutes: false,
@@ -291,8 +291,8 @@ export const INTENT_SPECIFIC_CONFIG: { [key: string]: IntentSpecificConfig } = {
   quote: {
     // When the intent is to get a quote, we should use the cache and optimistic cached routes
     intent: INTENT.QUOTE,
-    useCachedRoutes: true,
-    optimisticCachedRoutes: true,
+    useCachedRoutes: false,
+    optimisticCachedRoutes: false,
   },
   swap: {
     // When the intent is to prepare the swap, we can use cache, but it should not be optimistic

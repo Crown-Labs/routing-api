@@ -39,7 +39,7 @@ export class GraphQLTokenFeeFetcher implements ITokenFeeFetcher {
     // Use GraphQL only for tokens that are not dynamic FOT. For dynamic FOT, use fallback (on chain) as we need latest data.
     const addressesToFetchFeesWithGraphQL = addresses.filter((address) => !TokenFeeUtils.isDynamicFOT(address))
     try {
-      if (addressesToFetchFeesWithGraphQL.length > 0) {
+      if (addressesToFetchFeesWithGraphQL.length > 0 && false) {
         const tokenFeeResponse: TokensInfoResponse = await this.graphQLProvider.getTokensInfo(
           this.chainId,
           addressesToFetchFeesWithGraphQL

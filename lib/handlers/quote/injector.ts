@@ -144,6 +144,14 @@ export class QuoteHandlerInjector extends InjectorSOR<
           v4PoolParams,
           cachedRoutesCacheInvalidationFixRolloutPercentage,
         })
+
+        router = new AlphaRouter({
+          provider,
+          chainId,
+          multicall2Provider: multicallProvider,
+          gasPriceProvider,
+          simulator,
+        })
         break
     }
 
