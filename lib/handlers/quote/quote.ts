@@ -745,7 +745,7 @@ export class QuoteHandler extends APIGLambdaHandler<
     requestedProtocols?: string[] | string,
     forceCrossProtocol?: boolean
   ): Protocol[] | undefined {
-    return [Protocol.V4]
+    // return [Protocol.V4]
     const excludeV2 = false
 
     if (requestedProtocols) {
