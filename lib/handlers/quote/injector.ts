@@ -7,7 +7,7 @@ import {
   setGlobalLogger,
   setGlobalMetric,
   V3HeuristicGasModelFactory,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
 import { MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import { default as bunyan, default as Logger } from 'bunyan'
@@ -143,6 +143,14 @@ export class QuoteHandlerInjector extends InjectorSOR<
           mixedSupported,
           v4PoolParams,
           cachedRoutesCacheInvalidationFixRolloutPercentage,
+        })
+
+        router = new AlphaRouter({
+          provider,
+          chainId,
+          multicall2Provider: multicallProvider,
+          gasPriceProvider,
+          simulator,
         })
         break
     }

@@ -1,6 +1,4 @@
 import Joi from '@hapi/joi'
-import { Protocol } from '@uniswap/router-sdk'
-import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
 import {
   AlphaRouterConfig,
   getAddress,
@@ -13,11 +11,27 @@ import {
   sortsBefore,
   SwapOptions,
   SwapRoute,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
+import { Protocol } from '@uniswap/router-sdk'
+import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
+import { UniversalRouterVersion } from '@uniswap/universal-router-sdk'
+import { Pair } from '@uniswap/v2-sdk'
 import { Pool as V3Pool } from '@uniswap/v3-sdk'
 import { Pool as V4Pool } from '@uniswap/v4-sdk'
+import { MetricsLogger } from 'aws-embedded-metrics'
+import Logger from 'bunyan'
 import JSBI from 'jsbi'
 import _ from 'lodash'
+import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
+import { measureDistributionPercentChangeImpact } from '../../util/alpha-config-measurement'
+import { adhocCorrectGasUsed } from '../../util/estimateGasUsed'
+import { adhocCorrectGasUsedUSD } from '../../util/estimateGasUsedUSD'
+import {
+  convertStringRouterVersionToEnum,
+  protocolVersionsToBeExcludedFromMixed,
+  URVersionsToProtocolVersions,
+} from '../../util/supportedProtocolVersions'
+import { CurrencyLookup } from '../CurrencyLookup'
 import { APIGLambdaHandler, ErrorResponse, HandleRequestParams, Response } from '../handler'
 import { ContainerInjected, RequestInjected } from '../injector-sor'
 import { QuoteResponse, QuoteResponseSchemaJoi, SupportedPoolInRoute } from '../schema'
@@ -28,23 +42,9 @@ import {
   QUOTE_SPEED_CONFIG,
 } from '../shared'
 import { QuoteQueryParams, QuoteQueryParamsJoi, TradeTypeParam } from './schema/quote-schema'
-import { simulationStatusTranslation } from './util/simulation'
-import Logger from 'bunyan'
-import { PAIRS_TO_TRACK } from './util/pairs-to-track'
-import { measureDistributionPercentChangeImpact } from '../../util/alpha-config-measurement'
-import { MetricsLogger } from 'aws-embedded-metrics'
-import { CurrencyLookup } from '../CurrencyLookup'
 import { SwapOptionsFactory } from './SwapOptionsFactory'
-import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
-import { adhocCorrectGasUsed } from '../../util/estimateGasUsed'
-import { adhocCorrectGasUsedUSD } from '../../util/estimateGasUsedUSD'
-import { Pair } from '@uniswap/v2-sdk'
-import { UniversalRouterVersion } from '@uniswap/universal-router-sdk'
-import {
-  convertStringRouterVersionToEnum,
-  protocolVersionsToBeExcludedFromMixed,
-  URVersionsToProtocolVersions,
-} from '../../util/supportedProtocolVersions'
+import { PAIRS_TO_TRACK } from './util/pairs-to-track'
+import { simulationStatusTranslation } from './util/simulation'
 
 export class QuoteHandler extends APIGLambdaHandler<
   ContainerInjected,
@@ -249,6 +249,7 @@ export class QuoteHandler extends APIGLambdaHandler<
         metric,
       },
     } = params
+
     if (tokenInChainId !== tokenOutChainId) {
       return {
         statusCode: 400,
@@ -271,6 +272,16 @@ export class QuoteHandler extends APIGLambdaHandler<
     if (appVersion) {
       metric.putMetric(`AppVersion.${appVersion}`, 1)
     }
+
+    log.info(
+      {
+        chainId,
+        universalRouterVersion,
+        protocolsStr,
+        forceCrossProtocol,
+      },
+      'QuoteHandler protocols'
+    )
 
     const protocols = QuoteHandler.protocolsFromRequest(
       chainId,
@@ -296,6 +307,8 @@ export class QuoteHandler extends APIGLambdaHandler<
     ])
 
     metric.putMetric('TokenInOutStrToToken', Date.now() - currencyLookupStartTime, MetricLoggerUnit.Milliseconds)
+
+    log.info({ currencyIn, currencyOut }, 'currencyIn, currencyOut')
 
     if (!currencyIn) {
       return {
@@ -732,6 +745,7 @@ export class QuoteHandler extends APIGLambdaHandler<
     requestedProtocols?: string[] | string,
     forceCrossProtocol?: boolean
   ): Protocol[] | undefined {
+    // return [Protocol.V4]
     const excludeV2 = false
 
     if (requestedProtocols) {

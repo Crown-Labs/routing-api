@@ -1,13 +1,14 @@
-import { WidgetsFactory } from './core/widgets-factory'
-import { Widget } from './core/model/widget'
+import { ID_TO_NETWORK_NAME } from '@kittycorn-labs/smart-order-router/build/main/util/chains'
 import { ChainId } from '@uniswap/sdk-core'
 import _ from 'lodash'
-import { ID_TO_NETWORK_NAME } from '@uniswap/smart-order-router/build/main/util/chains'
 import { ProviderName } from '../handlers/evm/provider/ProviderName'
+import { Widget } from './core/model/widget'
+import { WidgetsFactory } from './core/widgets-factory'
 
 const ID_TO_PROVIDER = (id: ChainId): string => {
   switch (id) {
     case ChainId.MAINNET:
+      return ProviderName.WEB3_RPC
     case ChainId.OPTIMISM:
     case ChainId.SEPOLIA:
     case ChainId.POLYGON:

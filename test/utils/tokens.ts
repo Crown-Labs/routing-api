@@ -39,7 +39,7 @@ import {
   WRAPPED_NATIVE_CURRENCY,
   USDC_BASE_SEPOLIA,
   USDC_UNICHAIN,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
 import { ethers } from 'ethers'
 import NodeCache from 'node-cache'
 

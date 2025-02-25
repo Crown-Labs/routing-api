@@ -5,7 +5,7 @@ import {
   ITokenProvider,
   NATIVE_NAMES_BY_ID,
   nativeOnChain,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
 import Logger from 'bunyan'
 import { isAddress } from '../util/isAddress'
 

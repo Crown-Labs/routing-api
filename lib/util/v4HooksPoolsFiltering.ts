@@ -1,4 +1,4 @@
-import { V4SubgraphPool } from '@uniswap/smart-order-router'
+import { V4SubgraphPool } from '@kittycorn-labs/smart-order-router'
 import { Hook } from '@uniswap/v4-sdk'
 import { HOOKS_ADDRESSES_ALLOWLIST } from './hooksAddressesAllowlist'
 import { ChainId } from '@uniswap/sdk-core'

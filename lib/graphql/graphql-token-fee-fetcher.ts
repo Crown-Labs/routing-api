@@ -1,12 +1,14 @@
-import { ITokenFeeFetcher } from '@uniswap/smart-order-router/build/main/providers/token-fee-fetcher'
-import { IUniGraphQLProvider } from './graphql-provider'
-import { TokenFeeMap } from '@uniswap/smart-order-router/build/main/providers/token-fee-fetcher'
-import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
-import { TokensInfoResponse } from './graphql-schemas'
-import { BigNumber } from 'ethers'
+import { log, MetricLoggerUnit } from '@kittycorn-labs/smart-order-router'
+import { ProviderConfig } from '@kittycorn-labs/smart-order-router/build/main/providers/provider'
+import {
+  ITokenFeeFetcher,
+  TokenFeeMap,
+} from '@kittycorn-labs/smart-order-router/build/main/providers/token-fee-fetcher'
+import { metric } from '@kittycorn-labs/smart-order-router/build/main/util/metric'
 import { ChainId } from '@uniswap/sdk-core'
-import { metric } from '@uniswap/smart-order-router/build/main/util/metric'
-import { log, MetricLoggerUnit } from '@uniswap/smart-order-router'
+import { BigNumber } from 'ethers'
+import { IUniGraphQLProvider } from './graphql-provider'
+import { TokensInfoResponse } from './graphql-schemas'
 import { TokenFeeUtils } from './token-fee-utils'
 
 /* Implementation of the ITokenFeeFetcher interface to give access to Uniswap GraphQL API token fee data.
@@ -37,7 +39,7 @@ export class GraphQLTokenFeeFetcher implements ITokenFeeFetcher {
     // Use GraphQL only for tokens that are not dynamic FOT. For dynamic FOT, use fallback (on chain) as we need latest data.
     const addressesToFetchFeesWithGraphQL = addresses.filter((address) => !TokenFeeUtils.isDynamicFOT(address))
     try {
-      if (addressesToFetchFeesWithGraphQL.length > 0) {
+      if (addressesToFetchFeesWithGraphQL.length > 0 && false) {
         const tokenFeeResponse: TokensInfoResponse = await this.graphQLProvider.getTokensInfo(
           this.chainId,
           addressesToFetchFeesWithGraphQL

@@ -1,5 +1,6 @@
 export enum ProviderName {
   INFURA = 'INFURA',
+  WEB3_RPC = 'WEB3_RPC',
   QUIKNODE = 'QUIKNODE', // quicknode doesn't have letter c in the RPC endpoint
   QUIKNODE_GETH = 'QUIKNODE_GETH',
   QUIKNODE_RETH = 'QUIKNODE_RETH',

@@ -1,6 +1,6 @@
 import { describe, expect } from '@jest/globals'
 import { v4HooksPoolsFiltering } from '../../../../../lib/util/v4HooksPoolsFiltering'
-import { V4SubgraphPool } from '@uniswap/smart-order-router'
+import { V4SubgraphPool } from '@kittycorn-labs/smart-order-router'
 
 describe('v4HooksPoolsFiltering', () => {
   it('before swap hooks pool is filtered out', () => {

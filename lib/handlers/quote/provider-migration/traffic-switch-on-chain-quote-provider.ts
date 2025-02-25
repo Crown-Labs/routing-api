@@ -6,13 +6,13 @@ import {
   OnChainQuotes,
   SupportedExactOutRoutes,
   SupportedRoutes,
-} from '@uniswap/smart-order-router'
+} from '@kittycorn-labs/smart-order-router'
+import { ProviderConfig } from '@kittycorn-labs/smart-order-router/build/main/providers/provider'
+import { Protocol } from '@uniswap/router-sdk'
 import { ChainId, Currency, CurrencyAmount } from '@uniswap/sdk-core'
-import { ProviderConfig } from '@uniswap/smart-order-router/build/main/providers/provider'
-import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../util/quote-provider-traffic-switch-configuration'
 import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../util/onChainQuoteProviderConfigs'
-import { Protocol } from '@uniswap/router-sdk'
+import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../util/quote-provider-traffic-switch-configuration'
 
 export type TrafficSwitchOnChainQuoteProviderProps = {
   currentQuoteProvider: IOnChainQuoteProvider
