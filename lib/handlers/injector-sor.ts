@@ -95,6 +95,7 @@ import { DynamoRouteCachingProvider } from './router-entities/route-caching/dyna
 
 export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.MAINNET,
+  ChainId.SEPOLIA,
   // ChainId.OPTIMISM,
   // ChainId.ARBITRUM_ONE,
   // ChainId.POLYGON,

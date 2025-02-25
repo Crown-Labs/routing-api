@@ -34,7 +34,7 @@ export function chainIdToNetworkName(networkId: ChainId): string {
 }
 
 export function generateProviderUrl(key: string, value: string, chainId: number): string {
-  if (key === 'WEB3_RPC_1') {
+  if (key.startsWith('WEB3_RPC_')) {
     return value
   }
 
